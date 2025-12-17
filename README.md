@@ -3,7 +3,7 @@
 
 **TMenuThemes**  - Это класс, который создает в главном меню программы новый раздел "Themes" и  PopupMenu например для кнопки с выпадающим списком BtnThemes.DropDownMenu  в которых перечислены все темы, которые добавлены в проекте, для того чтобы пользователь мог выбрать и переключить тему (стиль) программы.
 
-![screenshot](/blob/main/image/image-01.png "")
+![screenshot](https://github.com/superbot-coder/ClassMenuThemes/blob/main/images/image-01.png "")
 
 #### ДВА МОДУЛЯ - ДВЕ РЕАЛИЗАЦИИ
 **1 Модуль uMenuThemesSpit.Pas**  
