@@ -22,13 +22,17 @@ Type
     FThemesCount: Word;
     FPopupMenu: TPopupMenu;
     FMenuItem: TMenuItem;
+    FOnChangeTheme: TNotifyEvent;
     procedure MenuItemClick(Sender: TObject);
     procedure MenuInit(MenuType: TMenuType);
+    procedure SetCaption(Value: String);
   public
     constructor Create(AOwner: TComponent);
-    procedure SetOnClick(MenuClick: TNotifyEvent; MemuType: TMenuType);
     function GetPopupMenu: TPopupMenu;
     procedure InsertToMainMenu(MainMenu: TMainMenu; Index: SmallInt);
+    procedure SetOnClick(MenuClick: TNotifyEvent; MemuType: TMenuType);
+    property Caption: String write SetCaption;
+    property OnChangeTheme: TNotifyEvent write FOnChangeTheme;
   end;
 
 implementation
@@ -110,6 +114,14 @@ begin
    FMenuItem.Find(SetStyleName).Checked := true;
 
  TStyleManager.SetStyle(SetStyleName);
+ FOnChangeTheme(Sender);
+end;
+
+procedure TMenuThemes.SetCaption;
+begin
+  if Not Assigned(FMenuItem) then
+    raise Exception.Create('Error: The "MenuItem" has not been created');
+  FMenuItem.Caption := Value;
 end;
 
 procedure TMenuThemes.SetOnClick(MenuClick: TNotifyEvent; MemuType: TMenuType);

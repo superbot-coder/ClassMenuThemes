@@ -16,18 +16,23 @@ USES
 type
   TMenuThemes = Class(TMenuItem)
   Private
+	FOnChangeTheme: TNotifyEvent;
     procedure MenuItemsClick(Sender: TObject); Inline;
     procedure MenuClick(Sender: TObject); Inline;
+	procedure SetCaption(Value: String);
   public
     constructor Create(MainMenu: TMainMenu; index: SmallInt);
+	property OnChangeTheme: TNotifyEvent write FOnChangeTheme; 	
   End;
 
   TPopuMenuThemes = class(TPopupMenu)
   private
+    FOnChangeTheme: TNotifyEvent;
     procedure MenuItemClick(Sender: TObject); Inline;
     procedure MenuPopup(Sender: TObject); Inline;
   public
     constructor Create(AOwner: TForm);
+	property OnChangeTheme: TNotifyEvent write FOnChangeTheme; 
   end;
 
 
@@ -72,6 +77,7 @@ begin
   var SetStyleName := TMenuItem(Sender).Caption.Replace('&', '');
   Find(SetStyleName).Checked := true;
   TStyleManager.SetStyle(SetStyleName);
+  FOnChangeTheme(Sender);
 end;
 
 { TPopuMenuThemes }
@@ -102,6 +108,7 @@ begin
  var SetStyleName := TMenuItem(Sender).Caption.Replace('&', '');
  Items.Find(SetStyleName).Checked := true;
  TStyleManager.SetStyle(SetStyleName);
+ FOnChangeTheme(Sender);
 end;
 
 procedure TPopuMenuThemes.MenuPopup(Sender: TObject);
