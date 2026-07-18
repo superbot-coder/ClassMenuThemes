@@ -12,7 +12,8 @@ interface
 USES
   System.SysUtils, System.Classes, Vcl.Forms,
   // Vcl.Dialogs,
-  Vcl.Menus, Themes;
+  Vcl.Menus,
+  Themes;
 
 Type
   TMenuThemes = class(TComponent)
@@ -101,6 +102,7 @@ begin
  begin
    if Assigned(FPopupMenu) then
      FPopupMenu.Items[i].Checked := false;
+
    if Assigned(FMenuItem) then
      FMenuItem[i].Checked := false;
  end;
@@ -114,7 +116,8 @@ begin
    FMenuItem.Find(SetStyleName).Checked := true;
 
  TStyleManager.SetStyle(SetStyleName);
- FOnChangeTheme(Sender);
+ if Assigned(FOnChangeTheme) then
+   FOnChangeTheme(Sender);
 end;
 
 procedure TMenuThemes.SetCaption;
